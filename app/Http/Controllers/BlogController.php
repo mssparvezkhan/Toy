@@ -31,13 +31,14 @@ use Modules\Admin\Models\Settings;
 class BlogController extends Controller
 {
  
-    public function __construct(Request $request,Settings $setting) {  
+    public function __construct(Request $request,Settings $setting) {
+        
         View::share('helper',new Helper);
         View::share('category_name',$request->segment(1));
         View::share('total_item',Cart::content()->count());
         View::share('sub_total',Cart::subtotal()); 
         View::share('userData',$request->session()->get('current_user'));
-
+        View::share('cart',Cart::content());
          
 
         $website_title      = $setting::where('field_key','website_title')->first();

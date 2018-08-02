@@ -9,22 +9,15 @@
         @section('content') 
 
             
-            <!-- Left side column. contains the logo and sidebar -->
-            
-                
-                @include('partials.home-slider')
-           
-
-            
-                <div id="main" class="site-main">
-                          <div class="page-wrapper">
-                              
-                              @include('partials.home-left-deals-offer-sidebar')
-                              
-                              @include('partials.home-right-product-panel')
-                              
-                          </div>
-                      </div>   
+            @include('partials.home-left-category-sidebar')
+            <section class="main_container">
+                <div class="container">
+                        @include('partials.home-left-panel')
+                    
+                        @include('partials.home-right-panel')
+                    
+                </div>
+            </section>  
 
             
         @stop

@@ -43,6 +43,7 @@ class HomeController extends Controller
         View::share('total_item',Cart::content()->count());
         View::share('sub_total',Cart::subtotal()); 
         View::share('userData',$request->session()->get('current_user'));
+        View::share('cart',Cart::content());
 
         $hot_products   = Product::orderBy('views','desc')->limit(3)->get();
         $special_deals  = Product::orderBy('discount','desc')->limit(3)->get(); 

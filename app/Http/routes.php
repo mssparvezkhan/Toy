@@ -145,8 +145,20 @@ Route::get('checkout',[
        'uses' =>  'ProductController@getProduct'
        ]);
 
+ Route::get('/updateWishlist/{id}', [ 
+        'as' => '',
+       'uses' =>   'ProductController@updateWishlist'
+       ]);
+ Route::get('/clearwishlist/{id}',[  
+        'as' => '',
+       'uses' =>  'ProductController@clearWishlist'
+       ]);
 
-
+ Route::get('/wishlist', [ 
+        'as' => '',
+       'uses' =>   'ProductController@wishlist'
+       ]);       
+       
 
     Route::get('{name}/buyNow/{id}', [ 
         'as' => '',

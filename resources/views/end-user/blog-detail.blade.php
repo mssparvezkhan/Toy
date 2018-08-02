@@ -10,16 +10,16 @@
                 <div class="page-wrapper">
                     <div class="col-md-6"><h1></h1>   </div>
                     <div class="col-md-6 text-right">
-                            <span><a href="#">Home</a> </span>
+                           <!-- <span><a href="#">Home</a> </span>
                                                   
-                            <span> Blog </span>  
+                            <span> Blog </span>-->  
                        </div>
                 </div>
             </div>
             <div id="main" class="site-main">            
                 <div class="page-wrapper">
                     <div class="blog-outer">
-                        <div class="">
+                        <div class="container">
                             <div class="row">
                                 <div class="col-lg-8">
                                     <div class="blog_list">

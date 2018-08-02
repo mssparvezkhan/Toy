@@ -140,7 +140,7 @@ class ProductController extends Controller {
     {              
         $cat_url    = $this->getCategoryById($request->get('product_category')); 
         $vendor_id = $request->session()->get('current_vendor_id');
-        //echo "<pre>"; print_r($vendor_id); die;
+        //echo "<pre>"; print_r($cat_url); die;
 
         if ($request->file('image')) { 
             $photo = $request->file('image');
@@ -160,21 +160,23 @@ class ProductController extends Controller {
                 $url        = $cat_url.$pro_slug;
             }
             
-            
-            if($request->file('additional_image')){
+            $additionalphotoname = [];
+            if($request->file('additional_image')[0]){
                 $images = $request->file('additional_image');
                 
+                //print_r($images); die;
                 foreach($images as $imgs){
                     $destinationPath = storage_path('uploads/products');                    
                     $imgs->move($destinationPath, time().$imgs->getClientOriginalName());
                     $additionalphotoname[] = time().$imgs->getClientOriginalName();                    
                 }
                 
-                $request->merge(['additional_image'=>json_encode($additionalphotoname)]);
+                //$request->merge(['additional_image'=>json_encode($additionalphotoname)]);
                 //echo "<pre>"; print_r($photoname); die;
             }
-
-
+            
+            //echo "<pre>"; print_r($additionalphotoname); die;
+            
             $product->product_category   =   $request->get('product_category');
             $product->description        =   $request->get('description');
             $product->price              =   $request->get('price');
@@ -186,7 +188,7 @@ class ProductController extends Controller {
             $product->video              =   $request->get('video');
             $product->url                =   $url;
             $product->created_by                =   $vendor_id;
-
+            //echo "<pre>"; print_r($product); die;
             if($request->get('title')){
                 $product->title  = $request->get('title');
             }

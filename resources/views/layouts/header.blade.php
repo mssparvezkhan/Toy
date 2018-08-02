@@ -1,279 +1,167 @@
-<!DOCTYPE html>
-  <html lang="en">
-    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-      <meta name="author" content=""> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
-      <meta name="description" content="{{$meta_description or '' }}"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="author" content=""> 
 
-      <meta name="keywords" content="{{$meta_key or ''}}"/>
+    <meta name="description" content="{{$meta_description or '' }}"/>
 
-        <meta property="og:title" content="{{$meta_key or ''}}" />
-        <meta property="og:site_name" content="Lazimbana.com" />
-        <meta property="og:url" content="{{url()->current()}}" />
-        <meta property="og:description" content="{{$meta_description or '' }}" />
-        <meta property="og:image" content="http://localhost/lazimbananew/public/new/images/logo-lazimbana.png" />
-        <meta property="fb:app_id" content="136910713811254" />
-    
-    
-      <link rel="icon" href="../../favicon.ico">
+    <meta name="keywords" content="{{$meta_key or ''}}"/>
 
-      <title> Lazımbana:
-            @if(isset($meta_key))    
-            {{ isset($meta_key)?$meta_key:''}}                             
-                    @else
-                {{  $main_title  or $product->category->name }}
+      <meta property="og:title" content="{{$meta_key or ''}}" />
+      <meta property="og:site_name" content="Lazimbana.com" />
+      <meta property="og:url" content="{{url()->current()}}" />
+      <meta property="og:description" content="{{$meta_description or '' }}" />
+      <meta property="og:image" content="http://localhost/lazimbananew/public/new/images/logo-lazimbana.png" />
+      <meta property="fb:app_id" content="136910713811254" />
+  
+  
+    <link rel="icon" href="../../favicon.ico">
 
-                @endif                      
-                
-        </title>
+    <title> MeowSlush:
+          @if(isset($meta_key))    
+          {{ isset($meta_key)?$meta_key:''}}                             
+                  @else
+              {{  $main_title  or $product->category->name }}
 
-      <link href="{{ asset('public/new/css/font-awesome.min.css') }}" rel="stylesheet">
-      <link href="{{ asset('public/new/css/bootstrap.min.css') }}" rel="stylesheet">
-        <link href="{{ asset('public/new/css/owl.carousel.min.css') }}" rel="stylesheet" >
-        <link href="{{ asset('public/new/css/jquery-ui.css') }}" rel="stylesheet" >
-        <link href="{{ asset('public/new/css/settings.css') }}" rel="stylesheet" type="text/css"  media="screen" />
-      <link href="{{ asset('public/new/css/easy-responsive-tabs.css') }}" rel="stylesheet">
-      
-      <link href="{{ asset('public/new/css/ubislider.min612e.css') }}" rel="stylesheet" type="text/css">
-        <link href="{{ asset('public/new/css/style.css') }}" rel="stylesheet">
+              @endif                      
+              
+    </title>
         
+<link href="{{ asset('public/new/css/font-awesome.min.css') }}" rel="stylesheet">
+<link href="{{ asset('public/new/css/bootstrap.min.css') }}" rel="stylesheet">
+<!--<link href="css/bannerscollection_zoominout.css" rel="stylesheet" type="text/css">-->
+<link href="{{ asset('public/new/css/ubislider.min612e.css')}}" rel="stylesheet" type="text/css">
+<link href="{{ asset('public/new/css/style.css') }}" rel="stylesheet">
+</head>
 
+<body>
+<header>
+	<div class="container">
+    	<section class="header-wrapper">
+        	<article class="header-middle">  
+                                    <!-- Logo -->
+                                    <div class="logo hidden-xs col-md-3  col-sm-3">
+                                        <a href="{{ url('/') }}"><img src="{{ asset('public/new/images/logo.png') }}" alt=" "></a>
+                                    </div>
+                                    <!-- /Logo -->
 
-      <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-      <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-      <![endif]-->
-    </head>
+                                    <!-- Header search -->
+                                    <div class="header-search col-md-6  col-sm-5">                               
+                                        <form action="#" class="search-form">
+                                            
+                                                <label>
+                                                    <input title="Search for:" name="s" value="" placeholder="Search for a Category, Brand or Product" class="search-field" type="search">
+                                                </label>
+                                                <input value="Search" class="search-submit" type="submit">
+                                            
+                                        </form>                               
+                                    </div>
+                                    <!-- /Header search -->
 
-        <body>
-        
-            <div class="container">
-                <div class="container_bg row">
-                      <div class="top_bar">
-                          <div class="page-wrapper">
-                              <div class="col-md-5 col-sm-5">
-                                  <ul class="woocom">
-                                      @if($userData==null)                                        
-                                        
-                                      <li class="top-login"><a href="#" onclick="return false">Giriş / Kayıt</a>
-                                      <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                                      {{ csrf_field() }}
-                                      <ul>
-                                      <li><label for="username">E-posta <span class="required">*</span></label></li>
-                                      <li><input class="input-text" name="email" id="email" value="" type="email"></li>
-                                      <li><label for="password">Parola <span class="required">*</span></label></li>
-                                      <li><input class="input-text" name="password" id="password" type="password"></li>
-                                      <li><input class="button" name="login" value="Oturum Aç" type="submit"></li>
-                                      <li class="reg-link"><a href="{{ url('myaccount/signup') }}" class="resig">KAYIT OL</a><a href="{{ url('password/reset') }}" class="forgot">ÞÝFRENÝ SIFIRLA</a></li>
-                                      <li class="reg-link"><a href="{{ url('admin/signUp') }}" class="resig">SATICI OL</a></li>
-                                      </ul>                                      
-                                      </form>
-                                      </li>
-                                      @else
-                                      <li class="topcart"> <a href="{{url('myaccount')}}">Hesabım</a> 
-
-                                      </li>
-                                       <li class="topcart"> <a href="{{url('signout')}}">Çıkış Yap</a> </li>
-                                      @endif
-                                      <li class="topcart"><a href="{{ url('/checkout') }}">Sepet<span class="cart-counts">{{$total_item}}</span></a><div class="cartdrop widget_shopping_cart nx-animate animated" style="visibility: visible;"><div class="widget_shopping_cart_content"><ul class="cart_list product_list_widget">Genel Toplam : {{$sub_total}}</ul></div></div></li>
-                                  </ul>
-                              </div>
-                              
-                              <div class="col-md-7 col-sm-7">
-                                  <div class="sf_search">
-                                  
-                                  <form>
-                                        
-                                    <input class="sf_input" autocomplete="off" value="{{ $q or ''}}" name="q" type="text">
-                                    <button class="sf_button searchsubmit" type="submit"><span>Ara</span></button>
-                                  </form>
-                                        
-                                  </div>
-                              </div>
-                          </div>                            
-                      </div>
-                      
-                      <div class="social-bar">              
-                              <ul class="social">
-                              <li class="twitter"><a href="#" title="twitter" target="_blank"><i class="fa fa-twitter"></i></a></li> 
-                              <li class="facebook"><a href="#" title="facebook" target="_blank"><i class="fa fa-facebook"></i></a></li> 
-                              <li class="skype"><a href="#" title="skype" target="_blank"><i class="fa fa-skype"></i></a></li> 
-                              <li class="googleplus"><a href="#" title="googleplus" target="_blank"><i class="fa fa-google-plus"></i></a></li> 
-                              <li class="flickr"><a href="#" title="flickr" target="_blank"><i class="fa fa-flickr"></i></a></li> 
-                              <li class="youtube"><a href="#" title="youtube" target="_blank"><i class="fa fa-youtube"></i></a></li> 
-                              <li class="instagram"><a href="#" title="instagram" target="_blank"><i class="fa fa-instagram"></i></a></li> 
-                              <li class="pinterest"><a href="#" title="pinterest" target="_blank"><i class="fa fa-pinterest"></i></a></li> 
-                              <li class="linkedin"><a href="#" title="linkedin" target="_blank"><i class="fa fa-linkedin"></i></a></li>
-                              </ul>
-                      </div>    
-                              
-                      <header>
-                          <div class="page-wrapper">
-                              <div class="col-md-4"><a href="{{ url('/') }}" class="logo"><img src="{{ asset('public/new/images/logo-lazimbana.png') }}"></a></div>
-                              <div class="col-md-8">
-                              <div class="navbar-header">
-                                      <button data-toggle="collapse-side" data-target=".side-collapse" data-target-2=".side-collapse-container" type="button" class="navbar-toggle pull-left"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-                                  </div>
-                                  <div class="header-icons woocart">
-                                      <a href="{{ url('/checkout') }}" class="reversed">
-                                          <span class="fa fa-cart-plus"></span>
-                                          <span class="cart-counts">{{$total_item}}</span>  
-                                      </a>
-                                  </div>
-                                  
-                                  <div class="navbar-inverse side-collapse in">
-                                    
-                                      <nav role="navigation" class="navbar-collapse">
-                                      @if(isset($category_menu) && $category_menu->count()==0) 
-                                        <ul class="nav navbar-nav">
-                                            @foreach ($category_list as $key => $value) 
-                                                <li><a href="{{ url($value->slug) }}">{!! ucfirst($value->name) !!}</a> 
-                                                @if(isset($mega_menu[$value->id]))
+                                    <!-- Header shopping cart -->
+                                    <div class="header-cart col-md-3  col-sm-4">
+                                        <div class="cart-wrapper">
+                                            <a href="{{url('checkout')}}" class="btn cart-btn default-btn" onclick="view_cart();">
+                                                <i class="fa fa-shopping-cart blue-color"></i>
+                                                <span><b> cart: </b></span>   <span class="blue-color"> <strong> ({{$total_item}} items) </strong> </span>
+                                                <span class="fa fa-caret-down"></span>
+                                            </a>                                  
+                                        </div>                            
+                                        <div class="cart-dropdown">
+                                            <span class="blue-color-mask blue-box-shadow color-mask-radius"></span>
+                                            <div class="pos-relative">
+                                                <table class="cart-table">
+                                                    <tbody>
+                                                    
+                                                        @foreach($cart as  $item)
+                                                        <tr>
+                                                            <td>
+                                                                <div class="product-media">                                                                 
+                                                                    <a href="#">  <img src="{{ asset('public/new/images/small-1.png') }}" alt=" "></a>
+                                                                </div>
+                                                            </td>
+                                                            <td>
+                                                                <div class="product-content">                                                     
+                                                                    <div class="product-name">
+                                                                        <a href="#">{{$item->name}}</a>
+                                                                        <span> {{$item->qty}}  </span>
+                                                                    </div>
+                                                                    <div class="product-price">
+                                                                        <h5 class="price"><b> £ {{$item->price}} </b></h5>
+                                                                        <a href="#" class="delete fa fa-close">  </a>
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                        @endforeach
+                                                   
+                                                    </tbody>
+                                                    <tfoot>
+                                                        <tr>
+                                                            <td>
+                                                                <div class="sub-total">
+                                                                    <span class="title">Total :</span>
+                                                                    <span class="amount"> <b> £{{$sub_total}} </b> </span>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tfoot>
+                                                </table>
+                                                <div class="chk-out">
+                                                    <a href="{{ url('/checkout') }}" class="btn default-btn">Checkout</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Header shopping cart -->                            
+                                </article>
+             
+             <article class="header-navigation">                           
+                                    <nav class="navbar navbar-default product-menu"> 
+                                        <div class="navbar-header">
+                                            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#product-menu">
+                                                <span class="sr-only">Toggle navigation</span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                                <span class="icon-bar"></span>
+                                            </button>                               
+                                        </div>
+                                        <div class="collapse navbar-collapse no-padding" id="product-menu">
+                                            <ul class="nav navbar-nav">
+                                                <li><a href="{{ url('/') }}">home</a></li>
+                                                <!--<li><a href="#">toy & book</a></li>-->
+                                                <li><a href="{{url('blogs')}}">blog</a></li>
                                                 
+                                                @if($userData==null)
+                                                <li><a href="{{ url('/myaccount/signup') }}" >Register</a>
+                                                <li><a href="{{ url('/myaccount/login') }}" >login</a>
+                                                    <!--<form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                                                    {{ csrf_field() }}
                                                     <ul>
-                                                     @foreach ($mega_menu[$value->id] as $key => $result)
-                                                        @foreach ($result as $url => $menu)
-                                                        <li class="col-md-3">
-                                                            <ul>
-                                                                 <li><a href="{{url($url)}}">{{ucfirst($menu) }}</a></li>
-                                                            </ul>
-                                                        </li> 
-                                                        @endforeach 
-                                                     @endforeach         
-                                                    </ul>
+                                                    <li><label for="username">E-mail <span class="required">*</span></label></li>
+                                                    <li><input class="input-text" name="email" id="email" value="" type="email"></li>
+                                                    <li><label for="password">Password <span class="required">*</span></label></li>
+                                                    <li><input class="input-text" name="password" id="password" type="password"></li>
+                                                    <li><input class="button" name="login" value="Login" type="submit"></li>
+                                                    <li class="reg-link"><a href="{{ url('myaccount/signup') }}" class="resig">Register</a><a href="{{ url('password/reset') }}" class="forgot">Forget Password</a></li>                                                    
+                                                    </ul>                                      
+                                                    </form>-->
                                                 </li>
+                                                @else    
+                                                <li><a href="{{url('myaccount')}}">My Account</a></li>
+                                                <li><a href="{{url('wishlist')}}">my wish list</a></li>                                                
+                                                <li><a href="{{ url('/checkout') }}">check out</a></li>
+                                                <li><a href="{{url('signout')}}">logout</a></li>
                                                 @endif
-                                            @endforeach    
-                                        </ul>
-                                      @endif
-                                      </nav>
-                                 </div>
-
-                                <!--<div class="navbar-inverse side-collapse in">
-                                    <nav role="navigation" class="navbar-collapse">
-                                        <ul class="nav navbar-nav">
-                                        
-                                        @foreach ($category_menu as $key => $value)  
-                                            <li><a href="{{ url($value->category->slug) }}">{!! ucfirst($value->category->name) !!}</a>
-                                            @if(isset($mega_menu[$value->category_id]))
-                                           
-                                                <ul>
-                                                 @foreach ($mega_menu[$value->category_id] as $key => $result)
-                                                    
-                                                    @foreach ($result as $url => $menu)
-                                                    
-                                                    <li class="col-md-3">
-                                                        <ul>
-                                                            <li><a href="{{url($url)}}">{{ucfirst($menu) }}</a></li>
-                                                        </ul>
-                                                    </li> 
-                                                    @endforeach 
-                                                 @endforeach         
-                                                </ul>
-                                            @endif
-                                            </li>
-                                            
-                                        @endforeach    
-                                        </ul>
+                                                 
+                                                </ul></div>
                                     </nav>
-                                </div>-->
-                                <div class="navbar-inverse side-collapse in">
-                                    <nav role="navigation" class="navbar-collapse">
-                                        <ul class="nav navbar-nav">
-                                        
-                                        @foreach ($cats as $key => $value)
-                                            @if($value['name'] != NULL)
-                                                <li><a href="{{ url($value['slug']) }}">{!! ucfirst($value['name']) !!}</a>
-                                            @endif
-                                            @if(isset($value['child']) && count($value['child'] > 0) && $value['name'] != NULL )
-                                                <ul class="dropdown">
-                                                    <li class="category_menu_list">
-                                                    
-                                                        @foreach ($value['child'] as $key => $result)
-                                                            @if($result['name'] != NULL)
-                                                            <ul onmouseenter="func();">
-                                                                <li class="category_title">
-                                                                    <a href="{{ url($result['slug']) }}">{!! ucfirst($result['name']) !!}</a></li>
-                                                                       @if(isset($result['child']) && count($result['child'] > 0) && $result['name'] != NULL )
-                                                                           
-                                                                                @foreach ($result['child'] as $key => $menu)
-                                                                                    @if($menu['name'] != NULL)
-                                                                                        <li>
-                                                                                            <a href="{{ url($menu['slug']) }}">{!! ucfirst($menu['name']) !!}</a>
-                                                                                                @if(isset($menu['child']) && count($menu['child'] > 0) && $menu['name'] != NULL )
-                                                                                                    <ul>
-                                                                                                       @foreach ($menu['child'] as $key => $submenu)
-                                                                                                            @if($submenu['name'] != NULL)
-                                                                                                                <li><a href="{{ url($submenu['slug']) }}">{!! ucfirst($submenu['name']) !!}</a></li>
-                                                                                                            @endif
-                                                                                                        @endforeach
-                                                                                                    </ul>
-                                                                                                @endif
-                                                                                        </li>
-                                                                                    @endif       
-                                                                                @endforeach    
-                                                                           
-                                                                       @endif
-                                                                </li>
-                                                            </ul>
-                                                            @endif
-                                                        @endforeach                                                   
-                                                    </li>                                                        
-                                                    <li class="category_img_menu"><a href="#"><img src="{{ file_exists(public_path('/new/images/category/'.$value['slug'].'.png')) ? asset('public/new/images/category/'.$value['slug'].'.png') : asset('public/new/images/category/default.png') }}"></a></li>
-                                                      
-                                                </ul>
-                                            @endif
-                                            </li>
-                                            
-                                        @endforeach    
-                                        </ul>
-                                    </nav>
-                                </div>
-                                <!--<div class="navbar-inverse side-collapse in">
-                                    <nav role="navigation" class="navbar-collapse">
-                                    <ul class="nav navbar-nav">
-                                    <li><a href="#">Otomotiv & Motosiklet</a>
-                                     <ul class="dropdown">
-                                         <li class="category_menu_list">
-                                             
-                                                <ul>
-                                                   <li class="category_title"><a href="#">category 1</a></li>
-                                                            <li><a href="#">Otomotiv & Motosiklet</a></li>
-                                                            <li><a href="#">Otomotiv & Motosiklet</a></li>
-                                                            <li><a href="#">Otomotiv & Motosiklet</a></li>
-                                                </ul>
-        
-                                                <ul>
-                                                           <li class="category_title"><a href="#">category 1</a></li>
-                                                            <li><a href="#">Otomotiv & Motosiklet</a></li>
-                                                            <li><a href="#">Otomotiv & Motosiklet</a></li>
-                                                            <li><a href="#">Otomotiv & Motosiklet</a></li>
-                                                </ul>                                                                                                    
-                                            </li>
-                                            <li class="category_img_menu"><a href="#"><img src="images/shop-slide-2.png"></a></li>
-                                          
-                                        </ul>
-                                    </li>
-                                    <li><a href="#">Süpermarket</a>
-                                     <ul>
-                                         <li><a href="#">Otomotiv & Motosiklet</a></li>
-                                            <li><a href="#">Otomotiv & Motosiklet</a></li>
-                                            <li><a href="#">Otomotiv & Motosiklet</a></li>
-                                        </ul>
-                                    </li>
-                                    </ul>
-                                    </nav>
-                               </div>-->
-                              </div>
-                          </div>
-                      </header>
-                      <script>
-                        function func(){
-                           // $(this).parent('li').css( "background-color", "red" );
-                        }
-                      </script>  
+                                </article>                   
+                                
+        </section>
+    </div>
+</header>        

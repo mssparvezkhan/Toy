@@ -34,6 +34,7 @@ use PDF;
 use Modules\Admin\Models\Settings;
 use Illuminate\Contracts\Encryption\DecryptException;
 use App\iyzipay\configIyzipay;
+use Illuminate\Support\Facades\DB;
 
 /**
  * Class AdminController
@@ -58,7 +59,8 @@ class ProductController extends Controller {
         View::share('total_item',Cart::content()->count());
         View::share('sub_total',Cart::subtotal());
         View::share('helper',new Helper);
-
+        View::share('cart',Cart::content());
+        
         View::share('userData',$request->session()->get('current_user'));
          if ($request->session()->has('current_user')) { 
 
@@ -76,7 +78,7 @@ class ProductController extends Controller {
        
         }
 
-        $hot_products   = Product::orderBy('views','desc')->limit(3)->get();
+        $hot_products   = Product::orderBy('views','desc')->limit(4)->get();
         $special_deals  = Product::orderBy('discount','desc')->limit(3)->get(); 
         View::share('hot_products',$hot_products);
         View::share('special_deals',$special_deals);  
@@ -869,6 +871,42 @@ class ProductController extends Controller {
                         ->back()
                         ->withInput()  
                         ->withErrors(['message'=>"Reset password link has sent. Please check your email."]);
+    }
+    
+    public function wishlist(Request $request) 
+    {  
+        
+        $wishlist = DB::table('wishlist as w')->join('products as p','w.product_id','=','p.id')->where('w.user_id',$this->user_id)->select('p.*')->get();
+
+        return view('end-user.wishlist', compact('wishlist'));
+    }
+    
+    public function updateWishlist(Request $request, $id) 
+    {
+        $already = DB::table('wishlist')->where(['user_id'=>$this->user_id,'product_id'=>$id])->get();
+        if(!$this->user_id){
+            return Redirect::to('login');
+        }
+        if(empty($already)){
+            DB::table('wishlist')->insert(
+                ['user_id' => $this->user_id, 'product_id' => $id]
+            );
+            return Redirect::to(url()->previous())->with('message', 'This Product has successfully added to your wishlist.');
+        }else{
+            return Redirect::to(url()->previous())->with('message', 'This Product was already added to your wishlist.');
+        }                       
+    }
+    
+    public function clearWishlist(Request $request, $id) 
+    {
+        $already = DB::table('wishlist')->where(['user_id'=>$this->user_id,'product_id'=>$id])->get();
+        
+        if(!empty($already)){
+            DB::table('wishlist')->where(['user_id'=>$this->user_id,'product_id'=>$id])->delete();
+            return Redirect::to(url()->previous())->with('message', 'This Product has successfully deleted from your wishlist.');
+        }else{
+            return Redirect::to(url()->previous())->with('message', 'This Product was not in  your wishlist.');
+        }                       
     }
 }   
 
